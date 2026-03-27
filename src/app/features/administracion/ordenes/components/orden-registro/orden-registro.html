@@ -1,0 +1,77 @@
+<div class="registro-container">
+  <div class="registro-card">
+
+    <div class="card-header">
+      <h2>{{ isEditing() ? 'Editar Orden' : 'Nueva Orden' }}</h2>
+      <a routerLink="/administracion/ordenes" class="btn-back">← Volver</a>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+      <div class="items-section">
+        <div class="items-header">
+          <h3>Productos de la orden</h3>
+          <button type="button" class="btn-add-item" (click)="agregarItem()">
+            + Agregar producto
+          </button>
+        </div>
+
+        <div formArrayName="items">
+          @for (item of items.controls; track $index) {
+            <div class="item-row" [formGroupName]="$index">
+
+              <div class="form-group flex-1">
+                <label>Producto</label>
+                <select formControlName="productId"
+                        [class.input-error]="item.get('productId')?.invalid
+                                          && item.get('productId')?.touched">
+                  <option [value]="null" disabled>Selecciona un producto</option>
+                  @for (p of productos(); track p.id) {
+                    <option [ngValue]="p.id">
+                      {{ p.name }} — S/ {{ p.price | number:'1.2-2' }}
+                      (Stock: {{ p.stock }})
+                    </option>
+                  }
+                </select>
+                @if (item.get('productId')?.invalid && item.get('productId')?.touched) {
+                  <span class="error-msg">Selecciona un producto</span>
+                }
+              </div>
+
+              <div class="form-group w-32">
+                <label>Cantidad</label>
+                <input type="number" formControlName="quantity" min="1"
+                       [class.input-error]="item.get('quantity')?.invalid
+                                         && item.get('quantity')?.touched"/>
+                @if (item.get('quantity')?.invalid && item.get('quantity')?.touched) {
+                  <span class="error-msg">Mínimo 1</span>
+                }
+              </div>
+
+              <button type="button" class="btn-remove-item"
+                      (click)="quitarItem($index)"
+                      [disabled]="items.length === 1">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0
+                       01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0
+                       00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                </svg>
+              </button>
+
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <a routerLink="/administracion/ordenes" class="btn-cancel">Cancelar</a>
+        <button type="submit" class="btn-submit" [disabled]="isLoading()">
+          @if (isLoading()) { Guardando... }
+          @else { {{ isEditing() ? 'Actualizar Orden' : 'Crear Orden' }} }
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

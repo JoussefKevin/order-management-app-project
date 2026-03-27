@@ -1,0 +1,91 @@
+<div class="listado-container">
+
+  <div class="section-header">
+    <div>
+      <h2>Usuarios</h2>
+      <p>Total: {{ totalElements() }} registros</p>
+    </div>
+    <a routerLink="nuevo" class="btn-primary">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 4v16m8-8H4"/>
+      </svg>
+      Nuevo Usuario
+    </a>
+  </div>
+
+  @if (isLoading()) {
+    <div class="state-box">
+      <div class="spinner"></div>
+      <span>Cargando usuarios...</span>
+    </div>
+  }
+
+  @if (hasError()) {
+    <div class="state-box error">
+      <span>Error al cargar los usuarios. Intenta nuevamente.</span>
+    </div>
+  }
+
+  @if (isEmpty()) {
+    <div class="state-box">
+      <span>No se encontraron usuarios.</span>
+    </div>
+  }
+
+  @if (!isLoading() && !isEmpty()) {
+    <div class="table-wrapper">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Fecha registro</th>
+            <th>Total gastado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (usuario of usuarios(); track usuario.id) {
+            <tr>
+              <td>{{ usuario.id }}</td>
+              <td>
+                <div class="user-cell">
+                  <div class="avatar">
+                    {{ usuario.name.charAt(0).toUpperCase() }}
+                  </div>
+                  <span>{{ usuario.name }}</span>
+                </div>
+              </td>
+              <td>{{ usuario.email }}</td>
+              <td>
+                <span class="role-badge"
+                      [attr.data-role]="usuario.role.name">
+                  {{ usuario.role.name }}
+                </span>
+              </td>
+              <td>{{ usuario.signUpDate | date:'dd/MM/yyyy' }}</td>
+              <td>S/ {{ usuario.totalSpent | number:'1.2-2' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  @if (totalPages() > 1) {
+    <div class="pagination">
+      <button (click)="onPageChange(page() - 1)"
+              [disabled]="page() === 0">
+        ← Anterior
+      </button>
+      <span>Página {{ page() + 1 }} de {{ totalPages() }}</span>
+      <button (click)="onPageChange(page() + 1)"
+              [disabled]="page() + 1 >= totalPages()">
+        Siguiente →
+      </button>
+    </div>
+  }
+
+</div>

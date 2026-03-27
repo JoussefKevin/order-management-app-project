@@ -1,0 +1,70 @@
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  transition: box-shadow 0.2s;
+}
+
+.user-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+
+.card-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: white;
+  font-weight: 700;
+  font-size: 1.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.card-name  { font-size: 0.9375rem; font-weight: 600; color: #1e293b; }
+.card-email { font-size: 0.8125rem; color: #64748b; }
+
+.role-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: fit-content;
+}
+
+.role-badge[data-color="purple"] { background: #faf5ff; color: #7c3aed; }
+.role-badge[data-color="green"]  { background: #f0fdf4; color: #16a34a; }
+.role-badge[data-color="blue"]   { background: #eff6ff; color: #2563eb; }
+.role-badge[data-color="gray"]   { background: #f1f5f9; color: #64748b; }
+
+.btn-delete {
+  width: 32px;
+  height: 32px;
+  background: #fff5f5;
+  border: none;
+  border-radius: 0.375rem;
+  color: #ef4444;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.btn-delete:hover { background: #fee2e2; }
+.btn-delete svg   { width: 16px; height: 16px; }

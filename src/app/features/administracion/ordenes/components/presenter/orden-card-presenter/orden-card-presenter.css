@@ -1,0 +1,44 @@
+.orden-card {
+  background: white;
+  border-radius: 0.875rem;
+  border: 1px solid #e2e8f0;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  transition: box-shadow 0.2s;
+}
+
+.orden-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.07); }
+
+.card-header { display: flex; justify-content: space-between; align-items: center; }
+
+.orden-id { font-weight: 700; color: #1e293b; font-size: 0.9375rem; }
+
+.badge { padding: 0.25rem 0.625rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; }
+.badge[data-status="PENDING"]   { background: #fffbeb; color: #d97706; }
+.badge[data-status="CONFIRMED"] { background: #f0fdf4; color: #16a34a; }
+.badge[data-status="CANCELLED"] { background: #fff5f5; color: #ef4444; }
+.badge[data-status="DELIVERED"] { background: #eff6ff; color: #2563eb; }
+
+.card-body { display: flex; flex-direction: column; gap: 0.375rem; }
+
+.info-row { display: flex; justify-content: space-between; align-items: center; }
+.label    { font-size: 0.8125rem; color: #64748b; }
+.value    { font-size: 0.875rem; font-weight: 600; color: #1e293b; }
+.value.total { color: #2563eb; }
+
+.card-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; padding-top: 0.5rem; border-top: 1px solid #f1f5f9; }
+
+.btn-view, .btn-edit { padding: .35rem .7rem; border-radius: .375rem; font-size: .75rem; font-weight: 600; text-decoration: none; transition: all .2s; }
+.btn-view       { background: #f0fdf4; color: #16a34a; }
+.btn-view:hover { background: #dcfce7; }
+.btn-edit       { background: #eff6ff; color: #2563eb; }
+.btn-edit:hover { background: #dbeafe; }
+
+.btn-cancel, .btn-delete { padding: .35rem .7rem; border-radius: .375rem; font-size: .75rem; font-weight: 600; border: none; cursor: pointer; transition: all .2s; }
+.btn-cancel          { background: #fffbeb; color: #d97706; }
+.btn-cancel:hover    { background: #fef3c7; }
+.btn-cancel:disabled { opacity: .4; cursor: not-allowed; }
+.btn-delete          { background: #fff5f5; color: #ef4444; }
+.btn-delete:hover    { background: #fee2e2; }

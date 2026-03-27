@@ -1,0 +1,40 @@
+<div class="orden-card">
+  <div class="card-header">
+    <span class="orden-id">Orden #{{ orden().id }}</span>
+    <span class="badge" [attr.data-status]="orden().status">
+      {{ orden().status | ordenStatus }}
+    </span>
+  </div>
+
+  <div class="card-body">
+    <div class="info-row">
+      <span class="label">Usuario</span>
+      <span class="value">#{{ orden().userId }}</span>
+    </div>
+    <div class="info-row">
+      <span class="label">Productos</span>
+      <span class="value">{{ orden().items.length }} item(s)</span>
+    </div>
+    @if (orden().total) {
+      <div class="info-row">
+        <span class="label">Total</span>
+        <span class="value total">S/ {{ orden().total | number:'1.2-2' }}</span>
+      </div>
+    }
+  </div>
+
+  <div class="card-actions">
+    <a [routerLink]="['/administracion/ordenes/detalle', orden().id]"
+       class="btn-view">Ver detalle</a>
+    <a [routerLink]="['/administracion/ordenes/editar', orden().id]"
+       class="btn-edit">Editar</a>
+    <button class="btn-cancel"
+            (click)="cancelar.emit(orden().id)"
+            [disabled]="orden().status === 'CANCELLED'">
+      Cancelar
+    </button>
+    <button class="btn-delete" (click)="eliminar.emit(orden().id)">
+      Eliminar
+    </button>
+  </div>
+</div>

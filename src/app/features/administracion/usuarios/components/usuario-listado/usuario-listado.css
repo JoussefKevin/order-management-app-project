@@ -1,0 +1,151 @@
+.listado-container { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.875rem;
+  border: 1px solid #e2e8f0;
+}
+
+.section-header h2 { font-size: 1.25rem; font-weight: 700; color: #1e293b; }
+.section-header p  { font-size: 0.8125rem; color: #64748b; margin-top: 0.125rem; }
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.625rem 1.25rem;
+  background: #2563eb;
+  color: white;
+  border-radius: 0.625rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover { background: #1d4ed8; }
+.btn-primary svg   { width: 18px; height: 18px; }
+
+/* States */
+.state-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 3rem;
+  background: white;
+  border-radius: 0.875rem;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+}
+
+.state-box.error { color: #ef4444; border-color: #fecaca; }
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Tabla */
+.table-wrapper {
+  background: white;
+  border-radius: 0.875rem;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.tabla { width: 100%; border-collapse: collapse; }
+
+.tabla thead tr {
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tabla th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tabla td {
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.tabla tbody tr:hover { background: #f8fafc; }
+.tabla tbody tr:last-child td { border-bottom: none; }
+
+/* User cell con avatar */
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: white;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Role badge */
+.role-badge {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.role-badge[data-role="ADMIN"]  { background: #faf5ff; color: #7c3aed; }
+.role-badge[data-role="CLIENT"] { background: #f0fdf4; color: #16a34a; }
+.role-badge[data-role="SELLER"] { background: #eff6ff; color: #2563eb; }
+
+/* Paginación */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.pagination button {
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.pagination button:hover:not(:disabled) { background: #f1f5f9; }
+.pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
+.pagination span { font-size: 0.875rem; color: #64748b; }

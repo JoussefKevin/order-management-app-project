@@ -1,0 +1,162 @@
+.table-wrapper {
+  background: white;
+  border-radius: 0.875rem;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.tabla thead tr {
+  background: #f8fafc;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.tabla th {
+  padding: 0.875rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.tabla td {
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+  background: white;
+}
+
+.tabla tbody tr:last-child td { border-bottom: none; }
+.tabla tbody tr:hover td { background: #f8fafc; }
+
+/* ID */
+.orden-id {
+  font-weight: 700;
+  color: #1e293b;
+  background: #f1f5f9;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+}
+
+/* Total */
+.total {
+  color: #2563eb;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge[data-status="PENDING"]   { background: #fffbeb; color: #d97706; }
+.badge[data-status="CONFIRMED"] { background: #f0fdf4; color: #16a34a; }
+.badge[data-status="CANCELLED"] { background: #fff5f5; color: #ef4444; }
+.badge[data-status="DELIVERED"] { background: #eff6ff; color: #2563eb; }
+
+/* Productos */
+.productos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.producto-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.2rem 0.5rem;
+  background: #f1f5f9;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  width: fit-content;
+}
+
+.producto-nombre {
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.producto-qty {
+  color: #2563eb;
+  font-weight: 700;
+  background: #dbeafe;
+  padding: 0 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.6875rem;
+}
+
+.text-muted { color: #94a3b8; font-size: 0.8125rem; }
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 0.375rem;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.btn-view, .btn-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  white-space: nowrap;
+  border: none;
+}
+
+.btn-view       { background: #f0fdf4; color: #16a34a; }
+.btn-view:hover { background: #dcfce7; }
+.btn-edit       { background: #eff6ff; color: #2563eb; }
+.btn-edit:hover { background: #dbeafe; }
+
+.btn-cancel, .btn-delete {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-cancel          { background: #fffbeb; color: #d97706; }
+.btn-cancel:hover    { background: #fef3c7; }
+.btn-cancel:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-delete          { background: #fff5f5; color: #ef4444; }
+.btn-delete:hover    { background: #fee2e2; }
+
+/* ← CRÍTICO: tamaño fijo para SVGs */
+.btn-view svg, .btn-edit svg,
+.btn-cancel svg, .btn-delete svg {
+  width: 14px !important;
+  height: 14px !important;
+  flex-shrink: 0;
+}

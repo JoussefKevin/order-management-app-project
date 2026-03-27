@@ -1,0 +1,17 @@
+<div class="product-card">
+  <div class="card-header">
+    <span class="card-id">#{{ producto().id }}</span>
+    <span class="badge" [attr.data-status]="producto().stock | productoSemaforo">
+      Stock: {{ producto().stock }}
+    </span>
+  </div>
+  <h3 class="card-name">{{ producto().name }}</h3>
+  <p class="card-desc">{{ producto().description }}</p>
+  <div class="card-footer">
+    <span class="card-price">S/ {{ producto().price | number:'1.2-2' }}</span>
+    <div class="card-actions">
+      <button class="btn-edit"   (click)="editar.emit(producto().id)">Editar</button>
+      <button class="btn-delete" (click)="eliminar.emit(producto().id)">Eliminar</button>
+    </div>
+  </div>
+</div>

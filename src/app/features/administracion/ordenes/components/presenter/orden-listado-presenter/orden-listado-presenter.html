@@ -1,0 +1,68 @@
+<div class="table-wrapper">
+  <table class="tabla">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fecha</th>
+        <th>Productos</th>
+        <th>Total</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (orden of ordenes(); track orden.id) {
+        <tr>
+          <td>
+            <span class="orden-id">#{{ orden.id }}</span>
+          </td>
+          <td>{{ orden.date }}</td>
+
+          <td>
+            @if (orden.items && orden.items.length > 0) {
+              <div class="productos-list">
+                @for (item of orden.items; track item.productId) {
+                  <div class="producto-chip">
+                    <span class="producto-nombre">{{ item.productName }}</span>
+                    <span class="producto-qty">x{{ item.quantity }}</span>
+                  </div>
+                }
+              </div>
+            } @else {
+              <span class="text-muted">—</span>
+            }
+          </td>
+
+          <td>
+            <strong class="total">
+              S/ {{ orden.totalAmount | number:'1.2-2' }}
+            </strong>
+          </td>
+          <td>
+            <span class="badge" [attr.data-status]="orden.state.name">
+              {{ orden.state.name | ordenStatus }}
+            </span>
+          </td>
+          <td>
+            <div class="actions">
+              <a [routerLink]="['detalle', orden.id]" class="btn-view">
+                Ver
+              </a>
+              <a [routerLink]="['editar', orden.id]" class="btn-edit">
+                Editar
+              </a>
+              <button class="btn-cancel"
+                      (click)="cancelar.emit(orden.id)"
+                      [disabled]="orden.state.name === 'CANCELLED'">
+                Cancelar
+              </button>
+              <button class="btn-delete" (click)="eliminar.emit(orden.id)">
+                Eliminar
+              </button>
+            </div>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

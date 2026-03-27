@@ -1,0 +1,78 @@
+.listado-container { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.875rem;
+  border: 1px solid #e2e8f0;
+}
+
+.section-header h2 { font-size: 1.25rem; font-weight: 700; color: #1e293b; }
+.section-header p  { font-size: 0.8125rem; color: #64748b; margin-top: 0.125rem; }
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.625rem 1.25rem;
+  background: #2563eb;
+  color: white;
+  border-radius: 0.625rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover { background: #1d4ed8; }
+.btn-primary svg   { width: 18px; height: 18px; }
+
+.state-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 3rem;
+  background: white;
+  border-radius: 0.875rem;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+}
+
+.state-box.error { color: #ef4444; border-color: #fecaca; }
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.pagination button {
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.pagination button:hover:not(:disabled) { background: #f1f5f9; }
+.pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
+.pagination span { font-size: 0.875rem; color: #64748b; }

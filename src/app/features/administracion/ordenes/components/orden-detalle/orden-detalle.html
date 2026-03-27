@@ -1,0 +1,97 @@
+<div class="detalle-container">
+
+  @if (isLoading()) {
+    <div class="state-box">
+      <div class="spinner"></div>
+      <span>Cargando detalle...</span>
+    </div>
+  }
+
+  @if (hasError()) {
+    <div class="state-box error">
+      <span>Error al cargar la orden.</span>
+    </div>
+  }
+
+  @if (orden(); as o) {
+    <div class="detalle-card">
+
+      <div class="detalle-header">
+        <div>
+          <h2>Orden #{{ o.id }}</h2>
+          <span class="badge"
+                [attr.data-status]="o.state?.name ?? o.status">
+            {{ (o.state?.name ?? o.status) | ordenStatus }}
+          </span>
+        </div>
+        <div class="header-actions">
+          <a [routerLink]="['/administracion/ordenes/editar', o.id]"
+             class="btn-edit">Editar</a>
+          <button class="btn-cancel"
+                  (click)="onCancelar()"
+                  [disabled]="(o.state?.name ?? o.status) === 'CANCELLED'">
+            Cancelar orden
+          </button>
+          <a routerLink="/administracion/ordenes" class="btn-back">← Volver</a>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">ID de Orden</span>
+          <span class="info-value"># {{ o.id }}</span>
+        </div>
+        @if (o.userId) {
+          <div class="info-item">
+            <span class="info-label">Usuario ID</span>
+            <span class="info-value">{{ o.userId }}</span>
+          </div>
+        }
+        <div class="info-item">
+          <span class="info-label">Total de items</span>
+          <span class="info-value">{{ o.items.length}}</span>
+        </div>
+        @if (o.totalAmount ?? o.total) {
+          <div class="info-item">
+            <span class="info-label">Total</span>
+            <span class="info-value total">
+              S/ {{ (o.totalAmount ?? o.total) | number:'1.2-2' }}
+            </span>
+          </div>
+        }
+      </div>
+
+      <div class="items-table-wrapper">
+        <h3>Detalle de productos</h3>
+        <table class="items-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Producto ID</th>
+              <th>Cantidad</th>
+              @if (o.items[0]?.price) {
+                <th>Precio Unit.</th>
+                <th>Subtotal</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of o.items; track item.id) {
+              <tr>
+                <td>{{ item.id }}</td>
+                <td>Producto #{{ item.productId }}</td>
+                <td>{{ item.quantity }}</td>
+                @if (item.price) {
+                  <td>S/ {{ item.price | number:'1.2-2' }}</td>
+                  <td>S/ {{ (item.price * item.quantity) | number:'1.2-2' }}</td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  }
+
+</div>

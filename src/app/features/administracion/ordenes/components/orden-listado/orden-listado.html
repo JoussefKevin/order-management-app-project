@@ -1,0 +1,54 @@
+<div class="listado-container">
+
+  <div class="section-header">
+    <div>
+      <h2>Órdenes</h2>
+      <p>Total: {{ totalElements() }} registros</p>
+    </div>
+    <a routerLink="nuevo" class="btn-primary">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 4v16m8-8H4"/>
+      </svg>
+      Nueva Orden
+    </a>
+  </div>
+
+  @if (isLoading()) {
+    <div class="state-box">
+      <div class="spinner"></div>
+      <span>Cargando órdenes...</span>
+    </div>
+  }
+
+  @if (hasError()) {
+    <div class="state-box error">
+      <span>Error al cargar las órdenes.</span>
+    </div>
+  }
+
+  @if (isEmpty()) {
+    <div class="state-box">
+      <span>No se encontraron órdenes.</span>
+    </div>
+  }
+
+  @if (!isLoading() && !isEmpty()) {
+    <app-orden-listado-presenter
+      [ordenes]="ordenes()"
+      (cancelar)="onCancelar($event)"
+      (eliminar)="onEliminar($event)"
+    />
+  }
+
+  @if (totalPages() > 1) {
+    <div class="pagination">
+      <button (click)="onPageChange(page() - 1)"
+              [disabled]="page() === 0">← Anterior</button>
+      <span>Página {{ page() + 1 }} de {{ totalPages() }}</span>
+      <button (click)="onPageChange(page() + 1)"
+              [disabled]="page() + 1 >= totalPages()">Siguiente →</button>
+    </div>
+  }
+
+</div>

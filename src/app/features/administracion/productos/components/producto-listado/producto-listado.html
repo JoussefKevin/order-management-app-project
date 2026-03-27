@@ -1,0 +1,88 @@
+<div class="listado-container">
+
+  <!-- Header -->
+  <div class="section-header">
+    <div>
+      <h2>Productos</h2>
+      <p>Total: {{ totalElements() }} registros</p>
+    </div>
+    <a routerLink="nuevo" class="btn-primary">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 4v16m8-8H4"/>
+      </svg>
+      Nuevo Producto
+    </a>
+  </div>
+
+  <!-- Búsqueda -->
+  <div class="search-bar">
+    <div class="search-input-wrapper">
+      <svg class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/>
+      </svg>
+      <input
+        type="text"
+        placeholder="Buscar producto por nombre..."
+        (input)="onSearch($any($event.target).value)"
+        class="search-input"
+      />
+    </div>
+  </div>
+
+  <!-- Loading -->
+  @if (isLoading()) {
+    <div class="state-box">
+      <div class="spinner"></div>
+      <span>Cargando productos...</span>
+    </div>
+  }
+
+  <!-- Error -->
+  @if (hasError()) {
+    <div class="state-box error">
+      <span>Error al cargar los productos. Intenta nuevamente.</span>
+    </div>
+  }
+
+  <!-- Empty -->
+  @if (isEmpty()) {
+    <div class="state-box">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0
+             01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0
+             01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0
+             006.586 13H4"/>
+      </svg>
+      <span>No se encontraron productos.</span>
+    </div>
+  }
+
+  <!-- Tabla -->
+  @if (!isLoading() && !isEmpty()) {
+    <app-producto-listado-presenter
+      [productos]="productos()"
+      (eliminar)="onEliminar($event)"
+    />
+  }
+
+  <!-- Paginación -->
+  @if (totalPages() > 1) {
+    <div class="pagination">
+      <button
+        (click)="onPageChange(page() - 1)"
+        [disabled]="page() === 0">
+        ← Anterior
+      </button>
+      <span>Página {{ page() + 1 }} de {{ totalPages() }}</span>
+      <button
+        (click)="onPageChange(page() + 1)"
+        [disabled]="page() + 1 >= totalPages()">
+        Siguiente →
+      </button>
+    </div>
+  }
+
+</div>
