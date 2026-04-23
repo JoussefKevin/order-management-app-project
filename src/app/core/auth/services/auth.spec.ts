@@ -5,6 +5,7 @@ import { AuthService } from './auth';
 import { TokenService } from './token';
 import { environment } from '../../../../environments/environment';
 import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -29,9 +30,11 @@ describe('AuthService', () => {
     tokenSpy.extractUserId.and.returnValue(null);
 
     TestBed.configureTestingModule({
-      imports: [provideHttpClientTesting, provideRouter([])],
       providers: [
         AuthService,
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideRouter([]),
         provideAnimations(),
         { provide: TokenService, useValue: tokenSpy }
       ]
@@ -173,12 +176,14 @@ describe('AuthService', () => {
 
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
-      imports: [provideHttpClientTesting, provideRouter([])],
-      providers: [
-        AuthService,
-        { provide: TokenService, useValue: tokenSpy }
-      ]
-    });
+    providers: [
+      AuthService,
+      provideHttpClient(),
+      provideHttpClientTesting(),
+      provideRouter([]),
+      { provide: TokenService, useValue: tokenSpy }
+    ]
+  });
 
     const restoredService = TestBed.inject(AuthService);
     expect(restoredService.isLoggedIn()).toBeTrue();
@@ -190,12 +195,14 @@ describe('AuthService', () => {
 
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
-      imports: [provideHttpClientTesting, provideRouter([])],
-      providers: [
-        AuthService,
-        { provide: TokenService, useValue: tokenSpy }
-      ]
-    });
+    providers: [
+      AuthService,
+      provideHttpClient(),
+      provideHttpClientTesting(),
+      provideRouter([]),
+      { provide: TokenService, useValue: tokenSpy }
+    ]
+  });
 
     TestBed.inject(AuthService);
     expect(tokenSpy.clearTokens).toHaveBeenCalled();
