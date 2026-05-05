@@ -11,7 +11,7 @@ import { OrdenService } from '../../services/orden';
 
 @Component({
   selector: 'app-orden-registro',
-  standalone: true,
+
   imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './orden-registro.html',
   styleUrl: './orden-registro.css'

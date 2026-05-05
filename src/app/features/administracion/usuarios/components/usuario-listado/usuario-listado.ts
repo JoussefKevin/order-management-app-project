@@ -27,12 +27,12 @@ export class UsuarioListadoComponent {
   readonly totalElements = computed(() => this.usuariosResource.value()?.totalElements ?? 0);
   readonly totalPages    = computed(() => this.usuariosResource.value()?.totalPages ?? 0);
   readonly isLoading     = computed(() => this.usuariosResource.isLoading());
-  readonly hasError      = computed(() =>
-    this.usuariosResource.error() !== null &&
-    this.usuariosResource.value() === undefined
-  );
-  readonly isEmpty = computed(() =>
+  readonly hasError      = computed(() => !!this.usuariosResource.error());
+  readonly isEmpty       = computed(() =>
     !this.isLoading() && !this.hasError() && this.usuarios().length === 0
+  );
+  readonly pageNumbers   = computed(() =>
+    Array.from({ length: this.totalPages() }, (_, i) => i)
   );
   onPageChange(newPage: number): void {
     this.page.set(newPage);

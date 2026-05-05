@@ -10,11 +10,11 @@
 .login-card {
   width: 100%;
   max-width: 420px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 1.25rem;
   padding: 2.5rem;
-  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 }
 
 .login-header {
@@ -43,20 +43,72 @@
 .login-header h1 {
   font-size: 1.75rem;
   font-weight: 700;
-  color: white;
+  color: #1e293b;
 }
 
-.login-header p { color: #94a3b8; font-size: 0.875rem; }
+.login-header p { color: #64748b; font-size: 0.875rem; }
 
 /* Material overrides para tema oscuro */
 .full-width { width: 100%; }
 
 ::ng-deep .login-card .mat-mdc-form-field {
-  --mdc-outlined-text-field-label-text-color: #94a3b8;
-  --mdc-outlined-text-field-input-text-color: white;
-  --mdc-outlined-text-field-outline-color: rgba(255,255,255,0.2);
-  --mdc-outlined-text-field-focus-outline-color: #3b82f6;
-  --mdc-outlined-text-field-hover-outline-color: rgba(255,255,255,0.4);
+  /* Borde */
+  --mdc-outlined-text-field-outline-color:        rgba(255,255,255,0.25);
+  --mdc-outlined-text-field-hover-outline-color:  rgba(255,255,255,0.5);
+  --mdc-outlined-text-field-focus-outline-color:  #3b82f6;
+
+  /* Label en reposo */
+  --mdc-outlined-text-field-label-text-color:       #e2e8f0;
+  /* Label flotando (encima del campo) */
+  --mdc-outlined-text-field-focus-label-text-color: #93c5fd;
+  --mat-form-field-label-text-color:                #e2e8f0;
+
+  /* Texto del input */
+  --mdc-outlined-text-field-input-text-color:       #ffffff;
+
+  /* Placeholder */
+  --mdc-outlined-text-field-input-text-placeholder-color: rgba(255,255,255,0.35);
+}
+
+/* Íconos prefix (email, lock) */
+::ng-deep .login-card .mat-mdc-form-field .mat-mdc-form-field-icon-prefix .mat-icon,
+::ng-deep .login-card .mat-mdc-form-field .mat-icon[matprefix] {
+  color: #93c5fd;
+}
+
+/* Botón ojo (suffix) e ícono dentro */
+::ng-deep .login-card .mat-mdc-form-field .mat-mdc-icon-button .mat-icon,
+::ng-deep .login-card .mat-mdc-form-field .mat-mdc-form-field-icon-suffix .mat-icon {
+  color: #94a3b8;
+}
+
+::ng-deep .login-card .mat-mdc-form-field .mat-mdc-icon-button:hover .mat-icon {
+  color: #e2e8f0;
+}
+
+/* Mensaje de error */
+::ng-deep .login-card .mat-mdc-form-field .mat-mdc-form-field-error {
+  color: #f87171;
+}
+
+.login-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.625rem;
+  color: #dc2626;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.login-error svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .submit-btn {
@@ -73,7 +125,7 @@
 
 .login-footer {
   text-align: center;
-  color: #475569;
+  color: #94a3b8;
   font-size: 0.75rem;
   margin-top: 1.5rem;
 }

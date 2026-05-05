@@ -9,7 +9,7 @@ import { OrdenService } from '../../services/orden';
 
 @Component({
   selector: 'app-orden-listado',
-  standalone: true,
+
   imports: [CommonModule, RouterLink, OrdenListadoPresenterComponent],
   templateUrl: './orden-listado.html',
   styleUrl: './orden-listado.css'

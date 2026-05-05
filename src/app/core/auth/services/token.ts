@@ -11,11 +11,11 @@ export class TokenService {
   private encryption = inject(EncryptionService);
 
   setAccessToken(token: string): void {
-    localStorage.setItem(KEY_ACCESS, this.encryption.encrypt(token));
+    sessionStorage.setItem(KEY_ACCESS, this.encryption.encrypt(token));
   }
 
   getAccessToken(): string | null {
-    const raw = localStorage.getItem(KEY_ACCESS);
+    const raw = sessionStorage.getItem(KEY_ACCESS);
     if (!raw) return null;
     try {
       return this.encryption.decrypt(raw);
@@ -25,11 +25,11 @@ export class TokenService {
   }
 
   setRefreshToken(token: string): void {
-    localStorage.setItem(KEY_REFRESH, this.encryption.encrypt(token));
+    sessionStorage.setItem(KEY_REFRESH, this.encryption.encrypt(token));
   }
 
   getRefreshToken(): string | null {
-    const raw = localStorage.getItem(KEY_REFRESH);
+    const raw = sessionStorage.getItem(KEY_REFRESH);
     if (!raw) return null;
     try {
       return this.encryption.decrypt(raw);
@@ -39,8 +39,8 @@ export class TokenService {
   }
 
   clearTokens(): void {
-    localStorage.removeItem(KEY_ACCESS);
-    localStorage.removeItem(KEY_REFRESH);
+    sessionStorage.removeItem(KEY_ACCESS);
+    sessionStorage.removeItem(KEY_REFRESH);
   }
 
   decodePayload(): TokenPayload | null {

@@ -6,7 +6,6 @@
         <mat-icon>security</mat-icon>
       </div>
       <h1>Order Management</h1>
-      <p>Ingresa tus credenciales para continuar</p>
     </div>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
@@ -38,11 +37,21 @@
         </button>
         @if (password.invalid && password.touched) {
           <mat-error>
-            @if (password.errors?.['required'])  { La contraseña es requerida }
-            @if (password.errors?.['minlength']) { Mínimo 6 caracteres }
+            @if (password.errors?.['required']) { La contraseña es requerida }
           </mat-error>
         }
       </mat-form-field>
+
+      <!-- Error de credenciales -->
+      @if (errorMsg()) {
+        <div class="login-error">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 9v2m0 4h.01M12 4a8 8 0 100 16A8 8 0 0012 4z"/>
+          </svg>
+          {{ errorMsg() }}
+        </div>
+      }
 
       <!-- Botón -->
       <button mat-raised-button color="primary"
@@ -58,7 +67,5 @@
       </button>
 
     </form>
-
-    <p class="login-footer">Order Management System &copy; 2024</p>
   </div>
 </div>

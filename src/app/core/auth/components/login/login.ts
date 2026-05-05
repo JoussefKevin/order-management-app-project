@@ -34,10 +34,11 @@ export class LoginComponent {
 
   readonly isLoading    = signal(false);
   readonly showPassword = signal(false);
+  readonly errorMsg     = signal<string | null>(null);
 
   form = this.fb.group({
     email:    ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
+    password: ['', [Validators.required]]
   });
 
   get email()    { return this.form.get('email')!; }
@@ -54,6 +55,7 @@ export class LoginComponent {
     }
 
     this.isLoading.set(true);
+    this.errorMsg.set(null);
     const credentials = this.form.getRawValue() as AuthRequestDto;
 
     this.authService.login(credentials).subscribe({
@@ -63,8 +65,12 @@ export class LoginComponent {
       },
       error: (err) => {
         this.isLoading.set(false);
-        const mensaje = err.error?.message ?? 'Credenciales incorrectas';
-        this.toastr.error(mensaje, 'Error de autenticación');
+        const status = err.status;
+        if (status === 401) {
+          this.errorMsg.set('Correo electrónico o contraseña incorrectos.');
+        } else {
+          this.errorMsg.set(err.error?.message ?? 'Ocurrió un error. Intenta nuevamente.');
+        }
       },
       complete: () => this.isLoading.set(false)
     });

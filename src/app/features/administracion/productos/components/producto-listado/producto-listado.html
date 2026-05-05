@@ -2,9 +2,18 @@
 
   <!-- Header -->
   <div class="section-header">
-    <div>
-      <h2>Productos</h2>
-      <p>Total: {{ totalElements() }} registros</p>
+    <div class="header-left">
+      <a routerLink="/home" class="btn-back">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Home
+      </a>
+      <div>
+        <h2>Productos</h2>
+        <p>Total: {{ totalElements() }} registros</p>
+      </div>
     </div>
     <a routerLink="nuevo" class="btn-primary">
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -69,14 +78,23 @@
   }
 
   <!-- Paginación -->
-  @if (totalPages() > 1) {
+  @if (totalElements() > 0) {
     <div class="pagination">
       <button
         (click)="onPageChange(page() - 1)"
         [disabled]="page() === 0">
         ← Anterior
       </button>
-      <span>Página {{ page() + 1 }} de {{ totalPages() }}</span>
+
+      @for (p of pageNumbers(); track p) {
+        <button
+          class="page-number"
+          [class.active]="p === page()"
+          (click)="onPageChange(p)">
+          {{ p + 1 }}
+        </button>
+      }
+
       <button
         (click)="onPageChange(page() + 1)"
         [disabled]="page() + 1 >= totalPages()">

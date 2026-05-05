@@ -1,10 +1,10 @@
-import { Injectable, NgZone, inject } from '@angular/core';
+import { Injectable, NgZone, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject, BehaviorSubject, fromEvent, merge } from 'rxjs';
+import { Subject, fromEvent, merge } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { AuthService } from '../auth/services/auth';
 
-const IDLE_TIMEOUT_MS = 5 * 60 * 1000; // 15 minutos
+const IDLE_TIMEOUT_MS = 5 * 60 * 1000;
 
 @Injectable({ providedIn: 'root' })
 export class IdleService {
@@ -13,10 +13,9 @@ export class IdleService {
   private authService = inject(AuthService);
   private ngZone      = inject(NgZone);
 
-  private readonly _isIdle$ = new BehaviorSubject<boolean>(false);
-  readonly isIdle$ = this._isIdle$.asObservable();
-  private readonly _destroy$ = new Subject<void>();
+  readonly isIdle = signal(false);
 
+  private readonly _destroy$ = new Subject<void>();
   private idleTimer: ReturnType<typeof setTimeout> | null = null;
 
   startWatching(): void {
@@ -34,7 +33,7 @@ export class IdleService {
         debounceTime(500),
         takeUntil(this._destroy$)
       ).subscribe(() => {
-        this._isIdle$.next(false);
+        this.isIdle.set(false);
         this.resetTimer();
       });
 
@@ -53,7 +52,7 @@ export class IdleService {
 
     this.idleTimer = setTimeout(() => {
       this.ngZone.run(() => {
-        this._isIdle$.next(true);
+        this.isIdle.set(true);
         this.authService.logout();
         this.router.navigate(['/login']);
       });

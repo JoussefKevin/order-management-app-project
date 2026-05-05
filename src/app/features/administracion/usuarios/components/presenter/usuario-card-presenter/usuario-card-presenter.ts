@@ -4,7 +4,7 @@ import { UsuarioResponseDto } from '../../../models/dto/usuario-response.dto';
 
 @Component({
   selector: 'app-usuario-card-presenter',
-  standalone: true,
+
   imports: [CommonModule],
   templateUrl: './usuario-card-presenter.html',
   styleUrl: './usuario-card-presenter.css'

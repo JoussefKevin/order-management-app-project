@@ -53,13 +53,6 @@ describe('LoginComponent', () => {
     expect(component.email.errors).toBeNull();
   });
 
-  it('la contraseña debe tener mínimo 6 caracteres', () => {
-    component.password.setValue('abc');
-    expect(component.password.errors?.['minlength']).toBeTruthy();
-    component.password.setValue('abcdef');
-    expect(component.password.errors).toBeNull();
-  });
-
   it('el formulario debe ser válido con datos correctos', () => {
     component.email.setValue('test@gmail.com');
     component.password.setValue('password123');

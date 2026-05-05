@@ -6,7 +6,7 @@ import { OrdenStatusPipe } from '../../../pipe/orden-status-pipe';
 
 @Component({
   selector: 'app-orden-card-presenter',
-  standalone: true,
+
   imports: [CommonModule, RouterLink, OrdenStatusPipe],
   templateUrl: './orden-card-presenter.html',
   styleUrl: './orden-card-presenter.css'

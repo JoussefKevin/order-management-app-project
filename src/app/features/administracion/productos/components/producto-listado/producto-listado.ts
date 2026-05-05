@@ -9,7 +9,7 @@ import { ProductoService } from '../../services/producto';
 import { ProductoListadoPresenter } from '../presenter/producto-listado-presenter/producto-listado-presenter';
 @Component({
   selector: 'app-producto-listado',
-  standalone: true,
+
   imports: [CommonModule, RouterLink, FormsModule, ProductoListadoPresenter],
   templateUrl: './producto-listado.html',
   styleUrl: './producto-listado.css'
@@ -36,11 +36,13 @@ export class ProductoListadoComponent {
   readonly totalPages    = computed(() => this.productosResource.value()?.page.totalPages ?? 0);
   readonly isLoading     = computed(() => this.productosResource.isLoading());
   readonly hasError      = computed(() =>
-    this.productosResource.error() !== null &&
-    this.productosResource.value() === undefined
+    !!this.productosResource.error()
   );
   readonly isEmpty = computed(() =>
     !this.isLoading() && !this.hasError() && this.productos().length === 0
+  );
+  readonly pageNumbers = computed(() =>
+    Array.from({ length: this.totalPages() }, (_, i) => i)
   );
 
   constructor() {
