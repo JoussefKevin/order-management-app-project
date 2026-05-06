@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { productoResolver } from '../resolvers/producto-resolver';
 
 export const productosRoutes: Routes = [
   {
@@ -26,7 +27,10 @@ export const productosRoutes: Routes = [
         path: 'editar/:id',
         loadComponent: () =>
           import('../components/producto-registro/producto-registro')
-            .then(m => m.ProductoRegistroComponent)
+            .then(m => m.ProductoRegistroComponent),
+        resolve: {
+          producto: productoResolver
+        }
       }
     ]
   }
