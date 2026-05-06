@@ -75,7 +75,7 @@
                 </span>
               </td>
               <td>{{ usuario.signUpDate ? (usuario.signUpDate | date:'dd/MM/yyyy') : '-' }}</td>
-              <td>S/ {{ (usuario.totalSpent ?? 0) | number:'1.2-2' }}</td>
+              <td>S/ {{ usuario.totalSpent | number:'1.2-2' }}</td>
             </tr>
           }
         </tbody>

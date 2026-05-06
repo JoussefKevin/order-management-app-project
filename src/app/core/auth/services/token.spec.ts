@@ -19,10 +19,10 @@ describe('TokenService', () => {
     });
 
     service = TestBed.inject(TokenService);
-    localStorage.clear();
+    sessionStorage.clear();
   });
 
-  afterEach(() => localStorage.clear());
+  afterEach(() => sessionStorage.clear());
 
   it('debe crearse correctamente', () => {
     expect(service).toBeTruthy();
