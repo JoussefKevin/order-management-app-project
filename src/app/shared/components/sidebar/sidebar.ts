@@ -24,7 +24,6 @@ export class SidebarComponent {
   readonly navItems: NavItem[] = [
     { label: 'Home',      path: '/home',                             icon: 'home',    roles: ['ADMIN','CLIENT','SELLER'] },
     { label: 'Productos', path: '/administracion/productos',         icon: 'box',     roles: ['ADMIN','SELLER'] },
-    { label: 'Órdenes',   path: '/administracion/ordenes',           icon: 'orders',  roles: ['ADMIN','CLIENT','SELLER'] },
     { label: 'Usuarios',  path: '/administracion/usuarios',          icon: 'users',   roles: ['ADMIN'] },
   ];
 

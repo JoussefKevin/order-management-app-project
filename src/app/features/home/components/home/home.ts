@@ -30,3 +30,37 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.idleService.stopWatching();
   }
 }
+
+@Component({
+  selector: 'app-home-bienvenida',
+  standalone: true,
+  template: `
+    <div class="welcome-screen">
+      <img src="/images/logo.png" alt="Logo" class="welcome-logo" />
+      <p class="welcome-sub">Selecciona una opción del menú para comenzar</p>
+    </div>
+  `,
+  styles: [`
+    .welcome-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      min-height: 60vh;
+      gap: 1.25rem;
+      text-align: center;
+    }
+    .welcome-logo {
+      width: 120px;
+      max-width: 60%;
+      object-fit: contain;
+      border-radius: 1rem;
+    }
+    .welcome-sub {
+      font-size: 1rem;
+      color: #64748b;
+    }
+  `]
+})
+export class HomeBienvenidaComponent {}

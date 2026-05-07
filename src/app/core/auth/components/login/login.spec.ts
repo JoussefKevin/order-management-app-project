@@ -96,4 +96,20 @@ describe('LoginComponent', () => {
     component.onSubmit();
     expect(component.isLoading()).toBeFalse();
   });
+
+  it('debe mostrar mensaje de credenciales incorrectas para error 401', () => {
+    authSpy.login.and.returnValue(throwError(() => ({ status: 401, error: {} })));
+    component.email.setValue('test@gmail.com');
+    component.password.setValue('password123');
+    component.onSubmit();
+    expect(component.errorMsg()).toBe('Correo electrónico o contraseña incorrectos.');
+  });
+
+  it('debe mostrar mensaje genérico cuando el error no tiene mensaje', () => {
+    authSpy.login.and.returnValue(throwError(() => ({ status: 500, error: {} })));
+    component.email.setValue('test@gmail.com');
+    component.password.setValue('password123');
+    component.onSubmit();
+    expect(component.errorMsg()).toBe('Ocurrió un error. Intenta nuevamente.');
+  });
 });

@@ -8,13 +8,17 @@
 .main-content {
   display: flex;
   flex: 1;
+  align-items: stretch;
+  min-height: 0;
 }
 
 .page-content {
   flex: 1;
+  min-width: 0;
   padding: 1.5rem;
   background: #f1f5f9;
   overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
 }
 

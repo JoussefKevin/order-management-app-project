@@ -93,4 +93,41 @@ describe('TokenService', () => {
     service.setAccessToken(fakeToken);
     expect(service.extractUserId()).toBe(5);
   });
+
+  it('debe retornar null si no hay refresh token', () => {
+    expect(service.getRefreshToken()).toBeNull();
+  });
+
+  it('getAccessToken debe retornar null si el decrypt lanza un error', () => {
+    sessionStorage.setItem('_oms_access', 'datos-invalidos');
+    encryptionSpy.decrypt.and.throwError('decrypt error');
+    expect(service.getAccessToken()).toBeNull();
+  });
+
+  it('getRefreshToken debe retornar null si el decrypt lanza un error', () => {
+    sessionStorage.setItem('_oms_refresh', 'datos-invalidos');
+    encryptionSpy.decrypt.and.throwError('decrypt error');
+    expect(service.getRefreshToken()).toBeNull();
+  });
+
+  it('decodePayload debe retornar null si no hay token', () => {
+    expect(service.decodePayload()).toBeNull();
+  });
+
+  it('decodePayload debe retornar null si el token tiene formato invalido', () => {
+    service.setAccessToken('token-sin-puntos');
+    expect(service.decodePayload()).toBeNull();
+  });
+
+  it('extractRole debe retornar null si no hay token', () => {
+    expect(service.extractRole()).toBeNull();
+  });
+
+  it('extractUserId debe retornar null si no hay token', () => {
+    expect(service.extractUserId()).toBeNull();
+  });
+
+  it('isTokenExpired debe retornar true si no hay token', () => {
+    expect(service.isTokenExpired()).toBeTrue();
+  });
 });
